@@ -1,0 +1,19 @@
+snippet docdump "doctrine debug dump"
+echo '<pre>';
+\Doctrine\Common\Util\Debug::dump($${1:variable});
+echo '</pre>';
+endsnippet
+
+snippet pre "echo pre then print_r variable"
+echo '<pre>'.print_r($${1:variable}, true).'</pre>';
+endsnippet
+
+snippet prev "echo pre then var_dump variable"
+echo '<pre>';
+var_dump($${1:variable});
+echo '</pre>';
+endsnippet
+
+snippet vd "var_dump"
+var_dump($${1:variable});
+endsnippet
