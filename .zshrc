@@ -35,7 +35,7 @@ source ~/.aliases
 . ~/code/z/z.sh
 
 # Customize to your needs...
-export PATH=/opt/local/bin:/opt/local/sbin:/Applications/XAMPP/xamppfiles/bin:/Users/sam/Mongo/mongodb-osx-x86_64-2.0.6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/sam/android-sdk-macosx/platform-tools
+export PATH=/opt/local/bin:/opt/local/sbin:/Applications/XAMPP/xamppfiles/bin:/Users/sam/Mongo/mongodb-osx-x86_64-2.0.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/sam/android-sdk-macosx/tools:/Users/sam/android-sdk-macosx/platform-tools
 #export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Users/sam/Mongo/mongodb-osx-x86_64-2.0.6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/sam/android-sdk-macosx/platform-tools
 
 export EDITOR=vim
