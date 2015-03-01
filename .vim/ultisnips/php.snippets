@@ -1,0 +1,113 @@
+snippet docdump "doctrine debug dump"
+echo '<pre>';
+\Doctrine\Common\Util\Debug::dump($${1:variable});
+echo '</pre>';
+endsnippet
+
+snippet pre "echo pre then print_r variable"
+echo '<pre>'.print_r($${1:variable}, true).'</pre>';
+endsnippet
+
+snippet prev "echo pre then var_dump variable"
+echo '<pre>';
+var_dump($${1:variable});
+echo '</pre>';
+endsnippet
+
+snippet vd "var_dump"
+var_dump($${1:variable});
+endsnippet
+
+snippet setter "PHP Class Setter" !b
+/**
+ * Setter for $1
+ */
+public function set${1/\w+\s*/\u$0/}($$1)
+{
+    $this->$1 = $$1;$3
+    ${4:return $this;}
+}
+$0
+endsnippet
+
+snippet getter "PHP Class Getter" !b
+/**
+ * Getter for $1
+ */
+public function get${1/\w+\s*/\u$0/}()
+{
+    return $this->$1;$2
+}
+$4
+endsnippet
+
+snippet gs "PHP Class Getter Setter" !b
+/**
+ * Getter for $1
+ */
+public function get${1/\w+\s*/\u$0/}()
+{
+    return $this->$1;$2
+}
+
+/**
+ * Setter for ${1/(\w+)\s*;/$1/}
+ */
+public function set${1/\w+\s*/\u$0/}($${1/(\w+)\s*;/$1/})
+{
+    $this->$1 = $${1/(\w+)\s*;/$1/};$3
+    ${4:return $this;}
+}
+$0
+endsnippet
+
+snippet symfonycommand "Symfony Command Class" !b
+<?php
+
+namespace ${1:My\Bundle\Namespace};
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class GreetCommand extends ContainerAwareCommand
+{
+    protected function configure()
+    {
+        $this
+            ->setName('${2:demo:greet}')
+            ->setDescription('${3:Description}')
+            ->addArgument(
+                'name',
+                InputArgument::OPTIONAL,
+                'Who do you want to greet?'
+            )
+            ->addOption(
+                'yell',
+                null,
+                InputOption::VALUE_NONE,
+                'If set, the task will yell in uppercase letters'
+            )
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $name = $input->getArgument('name');
+        if ($name) {
+            $text = 'Hello '.$name;
+        } else {
+            $text = 'Hello';
+        }
+
+        if ($input->getOption('yell')) {
+            $text = strtoupper($text);
+        }
+
+        $output->writeln($text);
+    }
+}
+$0
+endsnippet

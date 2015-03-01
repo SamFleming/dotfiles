@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/sam/Sites'
 let g:netrw_dirhist_2='/Users/sam/Sites/tcot'
 let g:netrw_dirhist_3='/Users/sam/Sites'
 let g:netrw_dirhist_4='/Users/sam/Sites/tcot'
 let g:netrw_dirhist_5='/Users/sam/Sites'
 let g:netrw_dirhist_6='/Users/sam/Sites/tcot'
+let g:netrw_dirhist_7='/Users/sam/Dropbox/Alfred 2/Alfred.alfredpreferences/workflows/user.workflow.0155ACB9-5006-466C-BE90-E724B2232F50'

@@ -34,6 +34,7 @@ syntax on
 "filetype off
 filetype plugin indent on
 au BufNewFile,BufRead *.tpl setlocal ft=html.twig
+au BufNewFile,BufRead *.twig.html setlocal ft=html.twig
 
 "set nohlsearch
 "set hlsearch
@@ -73,6 +74,7 @@ set smartindent
 "colorscheme solarized
 let g:molokai_original=1
 colorscheme molokai
+"colorscheme gotham
 
 if has("gui_running")
     "set transparency=0
@@ -131,3 +133,5 @@ nmap <leader>s :set list!<CR>
 inoremap {<cr> {<cr>}<c-o>O
 inoremap [<cr> [<cr>]<c-o>O
 inoremap (<cr> (<cr>)<c-o>O
+
+imap <F3> <C-R>=strftime("%I:%M:%S")<CR>

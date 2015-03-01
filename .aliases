@@ -89,6 +89,9 @@ alias grb='git rb'
 alias ll='ls -lah'
 alias cake='bin/cake'
 alias add_vhost='sudo ~/Sites/add_vhost.sh'
+alias vu="vagrant up"
+alias vs="vagrant suspend"
+alias vssh="vagrant ssh"
 
 # File size
 alias fs="stat -f \"%z bytes\""
@@ -116,6 +119,7 @@ alias phpini="sudo mvim /Applications/XAMPP/xamppfiles/etc/php.ini"
 alias http="nocorrect http"
 alias tmux="nocorrect tmux"
 alias ag="nocorrect ag"
+alias nvim="nocorrect nvim"
 
 # Utilities
 alias battery="pmset -g batt"
