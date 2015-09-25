@@ -1,71 +1,4 @@
 {
-<<<<<<< HEAD
-	"auto_complete_commit_on_tab": true,
-	"bold_folder_labels": true,
-	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
-	"file_exclude_patterns":
-	[
-		"*.pyc",
-		"*.pyo",
-		"*.exe",
-		"*.obj",
-		"*.o",
-		"*.a",
-		"*.lib",
-		"*.so",
-		"*.dylib",
-		"*.ncb",
-		"*.sdf",
-		"*.suo",
-		"*.idb",
-		".DS_Store",
-		"*.class",
-		"*.psd",
-		"*.db",
-		"*.swp",
-		"*.swo"
-	],
-	"font_size": 12.0,
-	"highlight_lines": true,
-	"highlight_modified_tabs": true,
-	"ignored_packages":
-	[
-		"LESS",
-		"Nettuts+ Fetch",
-		"Twitter Bootstrap Snippets",
-		"SublimeBlockCursor",
-		"SublimeLinter",
-		"SCSS",
-		"HighlightDuplicates",
-		"sublime-jslint",
-		"Vintage Numbers",
-		"Web Encoders",
-		"SideBarEnhancements",
-		"PhpBeautifier",
-		"Quick File Creator",
-		"Sublime File Navigator",
-		"Markdown Preview",
-		"JsFormat",
-		"Prolog",
-		"Jade",
-		"jQuery Snippets pack",
-		"YUI Compressor",
-		"Theme - Soda",
-		"Smarty",
-		"Stylus",
-		"Twig"
-	],
-	"new_window_settings":
-	{
-		"show_minimap": false
-	},
-	"open_files_in_new_window": false,
-	"save_on_focus_lost": true,
-	"theme": "Soda Light.sublime-theme",
-	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true,
-	"word_separators": "./\\()\"'-:,.;<>~!@#%^&*|+=[]{}`~?"
-=======
 	"color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
 	"default_encoding": "UTF-8",
 	"default_line_ending": "unix",
@@ -101,9 +34,8 @@
 	],
 	"show_encoding": true,
 	"show_line_endings": true,
-	"tab_size": 2,
-	"translate_tabs_to_spaces": false,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": true
->>>>>>> mathias/master
 }

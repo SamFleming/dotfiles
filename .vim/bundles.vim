@@ -8,12 +8,12 @@ Bundle 'othree/html5.vim'
 Bundle 'evidens/vim-twig'
 Bundle 'elzr/vim-json'
 Bundle 'pangloss/vim-javascript'
-Bundle 'stephpy/vim-yaml'
+" Bundle 'stephpy/vim-yaml'
 
 " Colours
 Bundle 'tomasr/molokai'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'whatyouhide/vim-gotham'
+" Bundle 'altercation/vim-colors-solarized'
+" Bundle 'whatyouhide/vim-gotham'
 
 " Editor configuration
 Bundle "vim-scripts/editorconfig-vim"
@@ -21,16 +21,17 @@ Bundle "vim-scripts/editorconfig-vim"
 " File navigation
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'mileszs/ack.vim'
+"Bundle 'mileszs/ack.vim'
 "Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'kien/ctrlp.vim'
+Bundle 'rking/ag.vim'
 
 " Git integration
 Bundle 'tpope/vim-fugitive'
 
 " HTML
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'jaxbot/browserlink.vim'
+" Bundle 'jaxbot/browserlink.vim'
 
 " User Interface
 "Bundle 'Lokaltog/powerline'
@@ -52,7 +53,7 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'jsoriano/vim-dbgp'
 Bundle 'tpope/vim-obsession'
-Bundle 'vim-scripts/vim-auto-save'
+" Bundle 'vim-scripts/vim-auto-save'
 Bundle 'ryanss/vim-hackernews'
 
 " Disabled plugins

@@ -9,7 +9,8 @@ endif
 
 set guioptions=aAce
 "
-so ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
+"so ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
+so /Library/Python/2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
 set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 

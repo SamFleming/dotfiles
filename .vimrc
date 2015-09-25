@@ -1,26 +1,33 @@
-<<<<<<< HEAD
 let mapleader = "\\"
 
 set nocompatible
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-so ~/.vim/bundles.vim
-
-so ~/.vim/settings.vim
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'kien/ctrlp.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'stephpy/vim-yaml'
+Bundle 'editorconfig/editorconfig-vim'
+Bundle 'tpope/vim-surround'
+Bundle 'arnaud-lb/vim-php-namespace'
+"Bundle 'xolox/vim-misc'
+"Bundle 'xolox/vim-easytags'
+"Bundle 'SirVer/ultisnips'
+Bundle 'tobyS/vmustache'
+Bundle 'tobyS/pdv'
+Bundle 'evidens/vim-twig'
+"Bundle 'othree/html5.vim'
+Bundle 'mattn/emmet-vim'
 
 set hidden
 set history=1000
 
-runtime macros/matchit.vim
-
-"if exists('+colorcolumn')
-    "set colorcolumn=120 " Color the 120th column differently
-"endif
-
 set wildmenu
-"set wildmode=list:longest
 
 set noswapfile
 set nobackup
@@ -29,10 +36,7 @@ set nowb
 set rnu
 set relativenumber number
 
-"set backspace=indent,eol,start
-
 syntax on
-"filetype off
 filetype plugin indent on
 au BufNewFile,BufRead *.tpl setlocal ft=html.twig
 au BufNewFile,BufRead *.twig.html setlocal ft=html.twig
@@ -55,27 +59,29 @@ set smarttab
 set autoindent
 set showmatch
 set smartindent
+set backspace=indent,eol,start
+set complete-=i
+set smarttab
+set nrformats-=octal
+set incsearch
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
 
-"function! Tab_Or_Complete()
-    "if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-        "return "\<C-N>"
-    "else
-        "return "\<Tab>"
-    "endif
-"endfunction
-":inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-":set dictionary="/usr/dict/words"
+set ruler
+set showcmd
 
-"set cursorline
-
-"vnoremap <Tab> >gv
-"vnoremap <S-Tab> <gv
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
 
 " color codeschool
-"colorscheme solarized
-let g:molokai_original=1
-colorscheme molokai
-"colorscheme gotham
+set background=dark
+colorscheme solarized
+" let g:molokai_original=1
+" colorscheme molokai
+" colorscheme gotham
 
 if has("gui_running")
     "set transparency=0
@@ -125,10 +131,6 @@ if has('mouse')
     endif
 endif
 
-" Disable auto folding
-let g:DisableAutoPHPFolding = 1
-"let php_folding=0
-
 nmap <leader>s :set list!<CR>
 
 inoremap {<cr> {<cr>}<c-o>O
@@ -136,111 +138,115 @@ inoremap [<cr> [<cr>]<c-o>O
 inoremap (<cr> (<cr>)<c-o>O
 
 imap <F3> <C-R>=strftime("%I:%M:%S")<CR>
-=======
-" Use the Solarized Dark theme
-set background=dark
-colorscheme solarized
-let g:solarized_termtrans=1
 
-" Make Vim more useful
-set nocompatible
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
-" Enhance command-line completion
-set wildmenu
-" Allow cursor keys in insert mode
-set esckeys
-" Allow backspace in insert mode
-set backspace=indent,eol,start
-" Optimize for fast terminal connections
-set ttyfast
-" Add the g flag to search/replace by default
-set gdefault
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
-" Change mapleader
-let mapleader=","
-" Don’t add empty newlines at the end of files
-set binary
-set noeol
-" Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
+" CtrlP Settings
+let g:ctrlp_map = '<leader>t'
+set wildignore+=app/cache/*,vendor/*,nbproject/*,*~
+set wildignore+=*/app/cache/*,*/vendor/*,*/nbproject/*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=tmp/**
+set wildignore+=log/**
+set wildignore+=*.png,*.jpg,*.gif,*.pdf,*.eot,*.ttf,*.woff
+set wildignore+=*sess_*
+set wildignore+=node_modules/*
 
-" Don’t create backups when editing files in certain directories
-set backupskip=/tmp/*,/private/tmp/*
+" NerdTree settings
+nmap <silent> <leader>\ :NERDTreeTabsToggle<CR>
 
-" Respect modeline in files
-set modeline
-set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
-set secure
-" Enable line numbers
-set number
-" Enable syntax highlighting
-syntax on
-" Highlight current line
-set cursorline
-" Make tabs as wide as two spaces
-set tabstop=2
-" Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-set list
-" Highlight searches
-set hlsearch
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting Vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-" Show the (partial) command as it’s being typed
-set showcmd
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
-endif
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
 
-" Strip trailing whitespace (,ss)
-function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
+" Solarized Settings
+let g:solarized_termcolors=256
+call togglebg#map("<F2>")
+
+" split navigation
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+
+function! MarkWindowSwap()
+    let g:markedWinNum = winnr()
 endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
-" Automatic commands
-if has("autocmd")
-	" Enable file type detection
-	filetype on
-	" Treat .json files as .js
-	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-	" Treat .md files as Markdown
-	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-endif
->>>>>>> mathias/master
+function! DoWindowSwap()
+    "Mark destination
+    let curNum = winnr()
+    let curBuf = bufnr( "%" )
+    exe g:markedWinNum . "wincmd w"
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr( "%" )
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf 
+endfunction
+
+nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+" window
+nmap <leader>swh :topleft  vnew<CR>
+nmap <leader>swl :botright vnew<CR>
+nmap <leader>swk :topleft  new<CR>
+nmap <leader>swj :botright new<CR>
+
+" buffer
+nmap <leader>sh :leftabove  vnew<CR>
+nmap <leader>sl :rightbelow vnew<CR>
+nmap <leader>sk :leftabove  new<CR>
+nmap <leader>sj :rightbelow new<CR>
+
+inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
+noremap <Leader>u :call PhpInsertUse()<CR>
+
+let g:easytags_async = 1
+
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <leader>pd :call pdv#DocumentWithSnip()<CR>
+
+" Toggle spell check
+nmap <leader>ss :setlocal spell!<CR>
+
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
+
+nmap <silent> <leader>cc <Plug>NERDCommenterToggle
+
+set showtabline=2 " always show tabs in gvim, but not vim
+" set up tab labels with tab number, buffer name, number of windows
+function! GuiTabLabel()
+  let label = ''
+  let bufnrlist = tabpagebuflist(v:lnum)
+  " Add '+' if one of the buffers in the tab page is modified
+  for bufnr in bufnrlist
+    if getbufvar(bufnr, "&modified")
+      let label = '+'
+      break
+    endif
+  endfor
+  " Append the tab number
+  let label .= v:lnum.': '
+  " Append the buffer name
+  let name = bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
+  if name == ''
+    " give a name to no-name documents
+    if &buftype=='quickfix'
+      let name = '[Quickfix List]'
+    else
+      let name = '[No Name]'
+    endif
+  else
+    " get only the file name
+    let name = fnamemodify(name,":t")
+  endif
+  let label .= name
+  " Append the number of windows in the tab page
+  let wincount = tabpagewinnr(v:lnum, '$')
+  return label . '  [' . wincount . ']'
+endfunction
+set guitablabel=%{GuiTabLabel()}
