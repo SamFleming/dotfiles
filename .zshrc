@@ -28,7 +28,8 @@ ZSH_THEME="nicoulaj"
 plugins=(git)
 
 # Customize to your needs...
-export PATH=/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/Applications/XAMPP/xamppfiles/bin:/Users/sam/Mongo/mongodb-osx-x86_64-2.0.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/sam/android-sdk-macosx/tools:/Users/sam/android-sdk-macosx/platform-tools:/Users/sam/Library/Python/2.7/bin:~/.composer/vendor/bin
+export PATH=/usr/local/php5/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/usr/local/mysql/bin
+export GOPATH=$HOME/go
 #export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Users/sam/Mongo/mongodb-osx-x86_64-2.0.6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/sam/android-sdk-macosx/platform-tools
 
 source ~/.aliases
@@ -36,7 +37,10 @@ source ~/.aliases
 # init z   https://github.com/rupa/z
 . ~/code/z/z.sh
 
-export EDITOR=vim
+# Load functions
+. ~/.functions
+
+export EDITOR=/usr/local/bin/vim
 
 LANG="en_US.UTF-8"
 LC_COLLATE="en_US.UTF-8"
@@ -47,8 +51,19 @@ LC_NUMERIC="en_US.UTF-8"
 LC_TIME="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
-source ~/.tmuxinator/completion.zsh
+#source ~/.tmuxinator/completion.zsh
 
 source $ZSH/oh-my-zsh.sh
 
 export ANSIBLE_HOSTS=~/ansible_hosts
+
+[ -z "$TMUX" ] && export TERM=xterm-256color
+
+# Base16 Shell
+export THEME="base16-tomorrow"
+if [ -z "$BACKGROUND" ]; then
+    export BACKGROUND="dark"
+fi
+
+BASE16_SHELL="$HOME/.config/base16-shell/$THEME.$BACKGROUND.sh"
+source $BASE16_SHELL

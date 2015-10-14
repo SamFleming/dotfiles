@@ -23,6 +23,8 @@ Bundle 'tobyS/pdv'
 Bundle 'evidens/vim-twig'
 "Bundle 'othree/html5.vim'
 Bundle 'mattn/emmet-vim'
+Bundle 'chriskempson/base16-vim'
+Bundle 'tpope/vim-fugitive'
 
 set hidden
 set history=1000
@@ -42,9 +44,9 @@ au BufNewFile,BufRead *.tpl setlocal ft=html.twig
 au BufNewFile,BufRead *.twig.html setlocal ft=html.twig
 
 "set nohlsearch
-"set hlsearch
+set hlsearch
 "set incsearch
-"nmap <silent> <space> :silent :nohlsearch<CR>
+nmap <silent> <space> :silent :nohlsearch<CR>
 
 "set listchars=tab:>-,trail:·,eol:$
 "nmap <silent> <leader>w :set nolist!<CR>
@@ -76,9 +78,15 @@ if v:version > 703 || v:version == 703 && has("patch541")
   set formatoptions+=j " Delete comment character when joining commented lines
 endif
 
+set encoding=utf8
+let base16colorspace=256  " Access colors present in 256 colorspace"
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+execute "set background=".$BACKGROUND
+execute "colorscheme ".$THEME
+
 " color codeschool
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 " let g:molokai_original=1
 " colorscheme molokai
 " colorscheme gotham
