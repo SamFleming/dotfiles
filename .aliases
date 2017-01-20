@@ -124,3 +124,6 @@ alias nvim="nocorrect nvim"
 
 # Utilities
 alias battery="pmset -g batt"
+
+alias https='http --default-scheme=https'
+alias art='php artisan'
