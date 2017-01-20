@@ -82,6 +82,7 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias g="git"
 alias v="vim"
 alias t="tmux"
+alias tm="tmuxinator"
 alias gs='git status'
 alias gco='git co'
 alias gci='git ci'
