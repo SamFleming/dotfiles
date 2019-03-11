@@ -2,29 +2,46 @@ let mapleader = "\\"
 
 set nocompatible
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+
+" Colours
+Bundle 'chriskempson/base16-vim'
+
+" File Navigation
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'kien/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'mileszs/ack.vim'
+
+" Syntaxs
 Bundle 'stephpy/vim-yaml'
+Bundle 'lumiliet/vim-twig'
+Bundle 'tobyS/vmustache'
+Bundle 'leafgarland/typescript-vim'
+Bundle 'ekalinin/dockerfile.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+
+" PHP Help
+Bundle 'arnaud-lb/vim-php-namespace'
+Bundle 'tobyS/pdv'
+
+" Helpers
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'tpope/vim-surround'
-Bundle 'arnaud-lb/vim-php-namespace'
-"Bundle 'xolox/vim-misc'
-"Bundle 'xolox/vim-easytags'
-"Bundle 'SirVer/ultisnips'
-Bundle 'tobyS/vmustache'
-Bundle 'tobyS/pdv'
-Bundle 'evidens/vim-twig'
-"Bundle 'othree/html5.vim'
 Bundle 'mattn/emmet-vim'
-Bundle 'chriskempson/base16-vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-rhubarb'
+Bundle 'tpope/tpope-vim-abolish'
+Bundle 'craigemery/vim-autotag'
+Bundle 'kristijanhusak/vim-carbon-now-sh'
+Bundle 'prakashdanish/vim-githubinator'
+
+" Setup fzf
+set rtp+=/usr/local/opt/fzf
 
 set hidden
 set history=1000
@@ -86,17 +103,17 @@ execute "colorscheme ".$THEME
 
 " color codeschool
 " set background=dark
-" colorscheme solarized
 " let g:molokai_original=1
 " colorscheme molokai
 " colorscheme gotham
 
 if has("gui_running")
+	let g:NERDTreeHijackNetrw=0
     "set transparency=0
 
     " Remove the toolbar and menu bar
-    set guioptions-=T
-    set guioptions-=m
+	set guioptions-=T
+	set guioptions-=m
 
     " Map command-[ and command-] to indenting or outdenting
     " while keeping the original selection in visual mode
@@ -132,7 +149,7 @@ if has('mouse')
     if &term =~ "xterm" || &term =~ "screen"
         " as of March 2013, this works:
         set ttymouse=xterm2
-        
+
         " previously, I found that ttymouse was getting reset, so had
         " to reapply it via an autocmd like this:
         autocmd VimEnter,FocusGained,BufEnter * set ttymouse=xterm2
@@ -148,9 +165,9 @@ inoremap (<cr> (<cr>)<c-o>O
 imap <F3> <C-R>=strftime("%I:%M:%S")<CR>
 
 " CtrlP Settings
-let g:ctrlp_map = '<leader>t'
-set wildignore+=app/cache/*,vendor/*,nbproject/*,*~
-set wildignore+=*/app/cache/*,*/vendor/*,*/nbproject/*
+"let g:ctrlp_map = '<leader>t'
+set wildignore+=app/cache/*,vendor/*,nbproject/*,*~,node_modules/*
+set wildignore+=*/app/cache/*,*/vendor/*,*/nbproject/*,*/node_modules/*
 set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
 set wildignore+=tmp/**
@@ -159,16 +176,17 @@ set wildignore+=*.png,*.jpg,*.gif,*.pdf,*.eot,*.ttf,*.woff
 set wildignore+=*sess_*
 set wildignore+=node_modules/*
 
+" FZF Settings
+nnoremap <C-p> :<C-u>FZF<CR>
+nnoremap <leader>t :<C-u>FZF<CR>
+
 " NerdTree settings
 nmap <silent> <leader>\ :NERDTreeTabsToggle<CR>
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
-
-" Solarized Settings
-let g:solarized_termcolors=256
-call togglebg#map("<F2>")
+let NERDTreeIgnore = ['\.pyc$']
 
 " split navigation
 nmap <C-j> <C-w>j
@@ -192,7 +210,7 @@ function! DoWindowSwap()
     "Switch to dest and shuffle source->dest
     exe curNum . "wincmd w"
     "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' markedBuf 
+    exe 'hide buf' markedBuf
 endfunction
 
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
@@ -258,3 +276,10 @@ function! GuiTabLabel()
   return label . '  [' . wincount . ']'
 endfunction
 set guitablabel=%{GuiTabLabel()}
+
+" ack.vim configuration
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+let g:move_key_modifier = 'm'
