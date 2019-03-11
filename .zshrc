@@ -60,10 +60,11 @@ export ANSIBLE_HOSTS=~/ansible_hosts
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # Base16 Shell
-export THEME="base16-tomorrow"
+#export THEME="base16-tomorrow-night"
+export THEME="base16-materia"
 if [ -z "$BACKGROUND" ]; then
     export BACKGROUND="dark"
 fi
 
-BASE16_SHELL="$HOME/.config/base16-shell/$THEME.$BACKGROUND.sh"
+BASE16_SHELL="$HOME/.config/base16-shell/scripts/$THEME.sh"
 source $BASE16_SHELL
