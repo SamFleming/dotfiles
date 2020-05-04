@@ -79,7 +79,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 #bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+t split toggle
@@ -91,7 +91,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -139,7 +139,23 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+x exec "i3lock -i /home/sam/Pictures/wallpaper.png"
+#bindsym $mod+Shift+x exec "i3lock -i /home/sam/Pictures/wallpaper.jpg"
+bindsym $mod+Shift+x exec "~/.config/i3/lock.sh"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindcode $mod+193 mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -176,13 +192,13 @@ bar {
 }
 
 for_window [class="^.*"] border pixel 0
-gaps inner 10
-gaps outer 10
+gaps inner 0
+gaps outer 0
 
 # fix graphics glitches
 new_window none
 
-for_window [window_role="pop-up"] floating enable
+#for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
@@ -190,19 +206,32 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-exec_always --no-startup-id feh --bg-fill /home/sam/Pictures/wallpaper.png
-exec --no-startup-id compton -b
+exec --no-startup-id /home/sam/.config/i3/displays.sh
 
-exec --no-startup-id compton --config ~/.config/compton.conf
+#exec_always --no-startup-id feh --bg-fill /home/sam/Pictures/wallpaper.jpg
+exec --no-startup-id nitrogen --restore
+#exec --no-startup-id feh --bg-fill /home/sam/wallpapers/wallpaper.png
+#exec --no-startup-id compton -b
+
+exec --no-startup-id compton --config /home/sam/.config/compton.conf -b --dbus
+
+#exec --no-startup-id xrandr --output DP-2 --above DVI-D-0
+#exec --no-startup-id xrandr --output DP-4 --mode 2560x1440 --rate 144 --right-of DVI-D-0
 
 # shortcut
 exec --no-startup-id synclient
 
 # window shortcuts
-bindsym $mod+w exec firefox
+bindsym $mod+w exec google-chrome
+bindsym $mod+o exec google-chrome --app=https://outlook.office365.com/mail/
+bindsym $mod+s exec spotify
 bindsym $mod+b exec kitty ranger
 exec setxkbmap -option ctrl:nocaps
 bindsym $mod+Tab workspace back_and_forth
+
+# Screenshots
+bindsym Control+Shift+4 exec "maim -o -u -s -n -b 5 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
+bindsym Mod4+Print exec "maim -o -u -s -n -b 5 | xclip -selection clipboard -t image/png"
 
 exec --no-startup-id synclient HorizEdgeScroll=1 VertEdgeScroll=1 VertScrollDelta=-111
 
@@ -220,7 +249,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh
 
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
