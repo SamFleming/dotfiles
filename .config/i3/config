@@ -230,7 +230,7 @@ exec setxkbmap -option ctrl:nocaps
 bindsym $mod+Tab workspace back_and_forth
 
 # Screenshots
-bindsym Control+Shift+4 exec "maim -o -u -s -n -b 5 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
+bindsym Control+Shift+4 exec "maim -o -u -s -n -b 5 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1 | sed 's/:/-/g').png"
 bindsym Mod4+Print exec "maim -o -u -s -n -b 5 | xclip -selection clipboard -t image/png"
 
 exec --no-startup-id synclient HorizEdgeScroll=1 VertEdgeScroll=1 VertScrollDelta=-111
