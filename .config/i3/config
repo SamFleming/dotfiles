@@ -188,12 +188,13 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 		position top
-        status_command i3status -c /home/sam/.config/i3/i3status.conf
+		status_command i3status -c /home/sam/.config/i3/i3status.conf
+		#status_command polybar example
 }
 
 for_window [class="^.*"] border pixel 0
-gaps inner 0
-gaps outer 0
+#gaps inner 0
+#gaps outer 0
 
 # fix graphics glitches
 new_window none
