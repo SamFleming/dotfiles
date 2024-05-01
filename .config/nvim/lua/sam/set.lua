@@ -26,5 +26,5 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "0"
 
 vim.opt.indentexpr = "="
-vim.opt.smartindent = true
-vim.opt.autoindent = true
+vim.opt.smartindent = false
+vim.opt.autoindent = false

@@ -37,14 +37,26 @@ cmp.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-	handlers = {
-		lsp_zero.default_setup,
-	},
-
 	ensure_installed = {
 		'tsserver',
 		'eslint',
 		'lua_ls',
+		'intelephense',
+		'bashls',
+		'cssls',
+		'cucumber_language_server',
+		'dockerls',
+		'docker_compose_language_service',
+		'graphql',
+		'html',
+		'jsonls',
+		'autotools_ls',
+		'marksman'
+	},
+
+	handlers = {
+		lsp_zero.default_setup,
 	},
 }
 
+-- require('lspconfig').intelephense.setup({})
