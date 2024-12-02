@@ -6,7 +6,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
-lsp_zero.setup_servers({'tsserver'})
+lsp_zero.setup_servers({'ts_ls'})
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
@@ -18,6 +18,10 @@ local cmp_action = require('lsp-zero').cmp_action()
 -- 	['<C-Space>'] = cmp.mapping.complete(),
 -- })
 cmp.setup({
+	sources = {
+		{ name = "supermaven" },
+		{ name = "nvim_lsp" },
+	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enter to confirm completion
 		['<CR>'] = cmp.mapping.confirm({select = false}),
@@ -38,7 +42,7 @@ cmp.setup({
 require("mason").setup()
 require("mason-lspconfig").setup {
 	ensure_installed = {
-		'tsserver',
+		'ts_ls',
 		'eslint',
 		'lua_ls',
 		'intelephense',
@@ -60,3 +64,4 @@ require("mason-lspconfig").setup {
 }
 
 -- require('lspconfig').intelephense.setup({})
+require('lspconfig').emmet_language_server.setup({})
