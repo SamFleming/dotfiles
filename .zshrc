@@ -30,7 +30,11 @@ plugins=(git)
 # Customize to your needs...
 export PATH=/usr/local/php5/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/usr/local/mysql/bin
 export GOPATH=$HOME/go
-#export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Users/sam/Mongo/mongodb-osx-x86_64-2.0.6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/sam/android-sdk-macosx/platform-tools
+
+if [[ "$OSTYPE" == "darwin"* && -d "/opt/homebrew/bin" ]]; then
+	export PATH="/opt/homebrew/bin:$PATH"
+	export MANPATH="/opt/homebrew/share/man:$MANPATH"
+fi
 
 source ~/.aliases
 
