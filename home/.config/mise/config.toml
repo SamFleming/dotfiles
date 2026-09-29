@@ -2,4 +2,9 @@
 idiomatic_version_file_enable_tools = ["node", "opentofu"]
 
 [tools]
+go = "latest"
+"go:github.com/air-verse/air" = "latest"
+"go:github.com/pressly/goose/v3/cmd/goose" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+"go:honnef.co/go/tools/cmd/staticcheck" = "latest"
 node = "latest"
