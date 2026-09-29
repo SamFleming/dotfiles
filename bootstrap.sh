@@ -1,34 +1,13 @@
 #!/usr/bin/env bash
-# Symlink everything in home/ into ~. Anything already there is moved to ~/.dotfiles-backup/<timestamp>/ first.
+# Symlink home/ into ~ with GNU Stow. Safe to re-run.
 set -euo pipefail
 cd "$(dirname "$0")"
-repo=$PWD/home
-backup=~/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)
 
-link() {
-	local src=$repo/$1 dst=~/$1
-	[ "$(readlink "$dst" 2>/dev/null)" = "$src" ] && return
-	if [ -e "$dst" ] || [ -L "$dst" ]; then
-		mkdir -p "$backup/$(dirname "$1")"
-		mv "$dst" "$backup/$1"
-		echo "backed up ~/$1"
-	fi
-	mkdir -p "$(dirname "$dst")"
-	ln -s "$src" "$dst"
-	echo "linked ~/$1"
-}
+# Other tools write into these folders. They must exist as real
+# folders first, or Stow links the whole folder and those files end up in this repo.
+mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills
 
-# These folders also hold files from other tools, so link their children
-shared=" .config .tmux .claude .claude/skills "
-walk() {
-	local f rel
-	for f in "$repo${1:+/$1}"/.[!.]* "$repo${1:+/$1}"/*; do
-		[ -e "$f" ] || continue
-		rel=${f#"$repo"/}
-		if [[ $shared == *" $rel "* ]]; then walk "$rel"; else link "$rel"; fi
-	done
-}
-walk ""
+stow --restow --target ~ home
 
 # Cloned rather than installed: the oh-my-zsh installer overwrites ~/.zshrc
 [ -d ~/.oh-my-zsh ] || git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh

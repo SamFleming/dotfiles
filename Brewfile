@@ -82,6 +82,8 @@ brew "python@3.12"
 brew "scrcpy"
 # Cross-shell prompt for astronauts
 brew "starship"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
 # Code-search similar to ack
 brew "the_silver_searcher"
 # Text interface for Git repositories

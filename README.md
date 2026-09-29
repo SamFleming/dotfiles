@@ -2,7 +2,7 @@
 
 macOS setup: zsh (oh-my-zsh + starship), mise, zoxide, tmux, nvim, Ghostty, git and a few Claude Code skills.
 
-Everything in `home/` is symlinked into `~`, so editing `~/.zshrc` edits this repo.
+`home/` is a [GNU Stow](https://www.gnu.org/software/stow/) package symlinked into `~`, so editing `~/.zshrc` edits this repo.
 
 ## New machine
 
@@ -21,14 +21,20 @@ Everything in `home/` is symlinked into `~`, so editing `~/.zshrc` edits this re
    ```
 6. Open tmux and press `prefix + I` to install tmux plugins.
 
-`bootstrap.sh` is safe to re-run. Anything it would replace is moved to `~/.dotfiles-backup/<timestamp>/` first.
+`bootstrap.sh` is safe to re-run. If a real file is already in the way, Stow aborts without changing anything. To keep the repo's version:
+
+```bash
+cd ~/dotfiles
+stow --adopt --target ~ home   # moves the existing files into home/
+git restore home               # then throws their contents away
+```
 
 ## Adding a file
 
 1. Move it into `home/` at the same path it has under `~`.
 2. Run `./bootstrap.sh`.
 
-`.config`, `.tmux`, `.claude` and `.claude/skills` are linked one entry at a time, because other tools keep files there too. Everything else in `home/` is linked as a whole.
+Stow links a folder as a whole unless it already exists in `~`. `bootstrap.sh` creates `~/.config`, `~/.tmux/plugins` and `~/.claude/skills` first, because other tools write into them and those files must not end up here.
 
 ## Updating the Brewfile
 
