@@ -21,7 +21,7 @@ Each folder in `home/` is a [GNU Stow](https://www.gnu.org/software/stow/) packa
 1. Install [Homebrew](https://brew.sh).
 2. Clone this repo to `~/dotfiles`.
 3. Install packages: `brew bundle --file ~/dotfiles/Brewfile`
-4. Link the dotfiles: `~/dotfiles/bootstrap.sh`. To link only some packages instead: `cd ~/dotfiles/home && stow --target ~ zsh git nvim`
+4. Link the dotfiles: `~/dotfiles/bootstrap.sh`. To link only some packages: `~/dotfiles/bootstrap.sh zsh git nvim`
 5. Create `~/.gitconfig.local`:
    ```ini
    [user]
@@ -49,7 +49,7 @@ git restore .                  # then throws their contents away
 
 To unlink a package: `cd ~/dotfiles/home && stow --delete --target ~ foo`
 
-Stow links a folder as a whole unless it already exists in `~`. `bootstrap.sh` creates `~/.config`, `~/.tmux/plugins` and `~/.claude/skills` first, because other tools write into them and those files must not end up here.
+Always link through `bootstrap.sh`, not plain `stow`. Stow links a folder as a whole unless it already exists in `~`. `bootstrap.sh` creates `~/.config`, `~/.tmux/plugins` and `~/.claude/skills` first, because other tools write into them and those files must not end up here.
 
 ## Updating the Brewfile
 

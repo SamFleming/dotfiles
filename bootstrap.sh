@@ -7,10 +7,10 @@ cd "$(dirname "$0")"
 # folders first, or Stow links the whole folder and those files end up in this repo.
 mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills
 
-# Every folder in home/ is a package. To install only some: cd home && stow --target ~ zsh git
+# Every folder in home/ is a package. Pass names to link only some: ./bootstrap.sh zsh git nvim
 cd home
-packages=(*/)
-stow --restow --target ~ "${packages[@]%/}"
+if [ $# -gt 0 ]; then packages=("$@"); else packages=(*/); packages=("${packages[@]%/}"); fi
+stow --restow --target ~ "${packages[@]}"
 cd ..
 
 # Cloned rather than installed: the oh-my-zsh installer overwrites ~/.zshrc
