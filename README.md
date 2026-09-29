@@ -60,3 +60,5 @@ brew bundle dump --file ~/dotfiles/Brewfile --force --no-vscode
 ## Credits
 
 Started life as a fork of [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles). Parts of `.aliases`, `.functions` and `.gitconfig` still come from there, under the MIT licence in `LICENSE-MIT.txt`.
+
+These Claude Code skills in `home/claude/.claude/skills/` are copied from [Matt Pocock's skills](https://github.com/mattpocock/skills), under the MIT licence in `LICENSE-mattpocock-skills.txt`: `codebase-design`, `domain-modeling`, `grill-me`, `grill-with-docs`, `grilling`, `handoff`, `improve-codebase-architecture`, `tdd` and `zoom-out`. They were last synced from commit `d81f3a1` (29 September 2026), except `zoom-out`, which has since been removed upstream.
