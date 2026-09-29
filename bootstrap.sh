@@ -10,7 +10,8 @@ mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills
 # Every folder in home/ is a package. Pass names to link only some: ./bootstrap.sh zsh git nvim
 cd home
 if [ $# -gt 0 ]; then packages=("$@"); else packages=(*/); packages=("${packages[@]%/}"); fi
-stow --restow --target ~ "${packages[@]}"
+# One at a time: stow 2.4.1 errors ("invalid target: .config") restowing several packages when only some are linked
+for p in "${packages[@]}"; do stow --restow --target ~ "$p"; done
 cd ..
 
 # Cloned rather than installed: the oh-my-zsh installer overwrites ~/.zshrc
