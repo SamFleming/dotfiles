@@ -7,7 +7,11 @@ cd "$(dirname "$0")"
 # folders first, or Stow links the whole folder and those files end up in this repo.
 mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills
 
-stow --restow --target ~ home
+# Every folder in home/ is a package. To install only some: cd home && stow --target ~ zsh git
+cd home
+packages=(*/)
+stow --restow --target ~ "${packages[@]%/}"
+cd ..
 
 # Cloned rather than installed: the oh-my-zsh installer overwrites ~/.zshrc
 [ -d ~/.oh-my-zsh ] || git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh

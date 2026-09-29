@@ -2,6 +2,6 @@
 *.bak
 *.bak.*
 # Claude project settings that tools drop into config folders
-home/.config/**/.claude/
+home/*/.config/**/.claude/
 # The global ignore hides .claude folders, but this one is tracked on purpose
-!home/.claude/
+!home/claude/.claude/

@@ -2,14 +2,26 @@
 
 macOS setup: zsh (oh-my-zsh + starship), mise, zoxide, tmux, nvim, Ghostty, git and a few Claude Code skills.
 
-`home/` is a [GNU Stow](https://www.gnu.org/software/stow/) package symlinked into `~`, so editing `~/.zshrc` edits this repo.
+Each folder in `home/` is a [GNU Stow](https://www.gnu.org/software/stow/) package, symlinked into `~`. Editing `~/.zshrc` edits this repo.
+
+| Package | What's in it |
+|---|---|
+| `zsh` | `.zshrc`, `.zprofile`, `.zshenv`, `.aliases`, `.functions`, `.hushlogin` |
+| `shell` | `.inputrc`, `.editorconfig`, `.curlrc`, `.wgetrc` |
+| `git` | `.gitconfig`, `.config/git/` (global ignore and attributes) |
+| `nvim` | `.config/nvim/` |
+| `tmux` | `.tmux.conf`, `.tmux/themes/` |
+| `ghostty` | `.config/ghostty/` |
+| `starship` | `.config/starship.toml` |
+| `mise` | `.config/mise/` (global tool versions) |
+| `claude` | Claude Code skills and statusline |
 
 ## New machine
 
 1. Install [Homebrew](https://brew.sh).
 2. Clone this repo to `~/dotfiles`.
 3. Install packages: `brew bundle --file ~/dotfiles/Brewfile`
-4. Link the dotfiles: `~/dotfiles/bootstrap.sh`
+4. Link the dotfiles: `~/dotfiles/bootstrap.sh`. To link only some packages instead: `cd ~/dotfiles/home && stow --target ~ zsh git nvim`
 5. Create `~/.gitconfig.local`:
    ```ini
    [user]
@@ -25,15 +37,17 @@ macOS setup: zsh (oh-my-zsh + starship), mise, zoxide, tmux, nvim, Ghostty, git 
 `bootstrap.sh` is safe to re-run. If a real file is already in the way, Stow aborts without changing anything. To keep the repo's version:
 
 ```bash
-cd ~/dotfiles
-stow --adopt --target ~ home   # moves the existing files into home/
-git restore home               # then throws their contents away
+cd ~/dotfiles/home
+stow --adopt --target ~ zsh    # moves the existing files into the package
+git restore .                  # then throws their contents away
 ```
 
 ## Adding a file
 
-1. Move it into `home/` at the same path it has under `~`.
+1. Move it into a package, at the same path it has under `~`. For example `~/.config/foo/config` goes in `home/foo/.config/foo/config`.
 2. Run `./bootstrap.sh`.
+
+To unlink a package: `cd ~/dotfiles/home && stow --delete --target ~ foo`
 
 Stow links a folder as a whole unless it already exists in `~`. `bootstrap.sh` creates `~/.config`, `~/.tmux/plugins` and `~/.claude/skills` first, because other tools write into them and those files must not end up here.
 
