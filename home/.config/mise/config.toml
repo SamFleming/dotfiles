@@ -2,4 +2,4 @@
 idiomatic_version_file_enable_tools = ["node", "opentofu"]
 
 [tools]
-node = "25.9.0"
+node = "latest"
