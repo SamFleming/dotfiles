@@ -79,10 +79,6 @@
 
 [core]
 
-	# Use custom `.gitignore` and `.gitattributes`
-	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
-
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
 	# [default] trailing-space: looks for spaces at the end of a line
 	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
@@ -141,7 +137,8 @@
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
-	default = matching
+	default = simple
+	autoSetupRemote = true
 
 # URL shorthands
 
@@ -164,3 +161,17 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[gpg]
+	format = ssh
+[pull]
+	ff = only
+
+# Identity, signing and machine-specific settings
+[include]
+	path = ~/.gitconfig.local

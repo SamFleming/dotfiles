@@ -12,3 +12,23 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# PHP Actor configuration created by Neovim Mason PHP LSP
+.phpactor.json
+
+.aider*
+opencode.json
+
+.cursor
+.playwright-mcp
+Claude.md
+.claude
+.chefz
+.notification-refactor
+
+**/.claude/settings.local.json
+
+# Per-repo personal scratch dir (never committed; not a team decision)
+.scratch/
+
+**/.claude/settings.local.json
