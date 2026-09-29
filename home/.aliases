@@ -7,11 +7,8 @@ alias .....="cd ../../../.."
 alias please=sudo
 alias hosts='sudo $EDITOR /etc/hosts'
 
-# ls
+# ls (oh-my-zsh adds l, la and ll)
 alias ls="command ls -G"
-alias l="ls -l"
-alias la="ls -la"
-alias ll="ls -lah"
 alias lsd='ls -l | grep "^d"'
 
 # `cat` with syntax highlighting. Prefer bat, fall back to Pygments.
