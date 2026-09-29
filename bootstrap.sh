@@ -1,23 +1,37 @@
 #!/usr/bin/env bash
-cd "$(dirname "${BASH_SOURCE}")";
+# Symlink everything in home/ into ~. Anything already there is moved to ~/.dotfiles-backup/<timestamp>/ first.
+set -euo pipefail
+cd "$(dirname "$0")"
+repo=$PWD/home
+backup=~/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)
 
-git pull origin master;
-
-function doIt() {
-	rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-		--exclude "base16-themes" \
-		--exclude "README.md" --exclude "LICENSE-MIT.txt" -avh --no-perms . ~;
-	cp -r base16-themes/* ~/.config/base16-shell/scripts/
-	source ~/.bash_profile;
+link() {
+	local src=$repo/$1 dst=~/$1
+	[ "$(readlink "$dst" 2>/dev/null)" = "$src" ] && return
+	if [ -e "$dst" ] || [ -L "$dst" ]; then
+		mkdir -p "$backup/$(dirname "$1")"
+		mv "$dst" "$backup/$1"
+		echo "backed up ~/$1"
+	fi
+	mkdir -p "$(dirname "$dst")"
+	ln -s "$src" "$dst"
+	echo "linked ~/$1"
 }
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-	doIt;
-else
-	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
-	echo "";
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		doIt;
-	fi;
-fi;
-unset doIt;
+# These folders also hold files from other tools, so link their children
+shared=" .config .tmux .claude .claude/skills "
+walk() {
+	local f rel
+	for f in "$repo${1:+/$1}"/.[!.]* "$repo${1:+/$1}"/*; do
+		[ -e "$f" ] || continue
+		rel=${f#"$repo"/}
+		if [[ $shared == *" $rel "* ]]; then walk "$rel"; else link "$rel"; fi
+	done
+}
+walk ""
+
+# Cloned rather than installed: the oh-my-zsh installer overwrites ~/.zshrc
+[ -d ~/.oh-my-zsh ] || git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+[ -d ~/.tmux/plugins/tpm ] || git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+[ -f ~/.gitconfig.local ] || echo "Create ~/.gitconfig.local with your [user] name, email and signingkey (see README)"
