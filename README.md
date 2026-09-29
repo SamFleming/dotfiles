@@ -18,21 +18,21 @@ Each folder in `home/` is a [GNU Stow](https://www.gnu.org/software/stow/) packa
 
 ## New machine
 
-1. Install [Homebrew](https://brew.sh).
-2. Clone this repo to `~/dotfiles`.
-3. Install packages: `brew bundle --file ~/dotfiles/Brewfile`
-4. Link the dotfiles: `~/dotfiles/bootstrap.sh`. To link only some packages: `~/dotfiles/bootstrap.sh zsh git nvim`
-5. Create `~/.gitconfig.local`:
-   ```ini
-   [user]
-   	name = Sam Fleming
-   	email = you@example.com
-   	signingkey = /Users/you/.ssh/id_ed25519.pub
-   [commit]
-   	gpgsign = true
-   ```
-6. Open tmux and press `prefix + I` to install tmux plugins.
-7. Install Claude Code: `curl -fsSL https://claude.ai/install.sh | bash`
+```bash
+git clone https://github.com/SamFleming/dotfiles.git ~/dotfiles   # macOS offers to install git first
+~/dotfiles/bootstrap.sh
+```
+
+`bootstrap.sh` then:
+
+1. Installs Homebrew if it's missing, then everything in the `Brewfile` that isn't installed yet. It never upgrades; run `brew upgrade` for that.
+2. Links every package in `home/` into `~`.
+3. Clones oh-my-zsh and tpm, and installs the tmux plugins.
+4. Asks for your git name and email and writes `~/.gitconfig.local`. It signs commits with `~/.ssh/id_ed25519.pub` (or `id_rsa.pub`) if one exists.
+5. Runs `mise install` for the global tools (Node, Go and the Go tools).
+6. Installs Claude Code.
+
+To link only some packages, and skip everything else: `~/dotfiles/bootstrap.sh zsh git nvim`
 
 `bootstrap.sh` is safe to re-run. If a real file is already in the way, Stow aborts without changing anything. To keep the repo's version:
 
