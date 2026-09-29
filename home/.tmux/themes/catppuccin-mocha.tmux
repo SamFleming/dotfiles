@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -g mode-style "fg=#11111b,bg=#bac2de"
+set -g message-style "fg=#11111b,bg=#bac2de"
+set -g message-command-style "fg=#11111b,bg=#bac2de"
+set -g pane-border-style "fg=#a6adc8"
+set -g pane-active-border-style "fg=#89b4fa"
+set -g status "on"
+set -g status-justify "left"
+set -g status-style "fg=#bac2de,bg=#11111b"
+set -g status-left-length "100"
+set -g status-right-length "100"
+set -g status-left-style NONE
+set -g status-right-style NONE
+set -g status-left "#[fg=#11111b,bg=#89b4fa,bold] #S #[fg=#89b4fa,bg=#11111b,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=#11111b,bg=#11111b,nobold,nounderscore,noitalics]#[fg=#89b4fa,bg=#11111b] #{prefix_highlight} #[fg=#bac2de,bg=#11111b,nobold,nounderscore,noitalics]#[fg=#11111b,bg=#bac2de] %Y-%m-%d  %I:%M %p #[fg=#89b4fa,bg=#bac2de,nobold,nounderscore,noitalics]#[fg=#11111b,bg=#89b4fa,bold] #h "
+setw -g window-status-activity-style "underscore,fg=#9399b2,bg=#11111b"
+setw -g window-status-separator ""
+setw -g window-status-style "NONE,fg=#9399b2,bg=#11111b"
+setw -g window-status-format "#[fg=#11111b,bg=#11111b,nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=#11111b,bg=#11111b,nobold,nounderscore,noitalics]"
+setw -g window-status-current-format "#[fg=#11111b,bg=#bac2de,nobold,nounderscore,noitalics]#[fg=#11111b,bg=#bac2de,bold] #I  #W #F #[fg=#bac2de,bg=#11111b,nobold,nounderscore,noitalics]"
