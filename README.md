@@ -20,6 +20,7 @@ macOS setup: zsh (oh-my-zsh + starship), mise, zoxide, tmux, nvim, Ghostty, git 
    	gpgsign = true
    ```
 6. Open tmux and press `prefix + I` to install tmux plugins.
+7. Install Claude Code: `curl -fsSL https://claude.ai/install.sh | bash`
 
 `bootstrap.sh` is safe to re-run. If a real file is already in the way, Stow aborts without changing anything. To keep the repo's version:
 
