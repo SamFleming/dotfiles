@@ -1,0 +1,19 @@
+[kubernetes]
+disabled = false
+format = '[$context( \($namespace\))]($style) '
+style = "cyan"
+
+[[kubernetes.contexts]]
+context_pattern = "wiq-prod"
+style = "bold red"
+
+[[kubernetes.contexts]]
+context_pattern = "wiq-qa"
+style = "yellow"
+
+[gcloud]
+disabled = true
+
+# Host PHP isn't what the repos run (they use Docker images), and it costs about 150ms per prompt
+[php]
+disabled = true
