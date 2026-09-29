@@ -10,8 +10,6 @@ brew "agg"
 brew "argocd"
 # Record and share terminal sessions
 brew "asciinema"
-# Extendable version manager with support for Ruby, Node.js, Erlang & more
-brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Mozilla CA bundle for Python
@@ -117,7 +115,3 @@ cask "font-hack-nerd-font"
 cask "gcloud-cli"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-go "github.com/air-verse/air"
-go "github.com/pressly/goose/v3/cmd/goose"
-go "golang.org/x/tools/gopls"
-go "honnef.co/go/tools/cmd/staticcheck"
