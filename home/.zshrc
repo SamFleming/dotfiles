@@ -3,7 +3,6 @@ path=(/opt/homebrew/bin /opt/homebrew/sbin $HOME/go/bin /usr/local/go/bin $HOME/
 export GOPATH=$HOME/go
 export EDITOR=nvim
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-[ -z "$TMUX" ] && export TERM=xterm-256color
 
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME=""  # prompt comes from starship, see below

@@ -1,1 +1,3 @@
 theme = Catppuccin Frappe
+# Install Ghostty terminfo on SSH hosts, falling back to TERM=xterm-256color where that fails
+shell-integration-features = ssh-env,ssh-terminfo
