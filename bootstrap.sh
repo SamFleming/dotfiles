@@ -17,7 +17,7 @@ command -v stow >/dev/null || { echo "stow is missing: brew install stow"; exit 
 
 # Other tools write into these folders. They must exist as real
 # folders first, or Stow links the whole folder and those files end up in this repo.
-mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills
+mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills ~/Library/Application\ Support/k9s
 
 # Every folder in home/ is a package
 cd home

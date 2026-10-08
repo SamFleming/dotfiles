@@ -1,6 +1,6 @@
 # Sam's dotfiles
 
-macOS setup: zsh (oh-my-zsh + starship), mise, zoxide, tmux, nvim, Ghostty, git and a few Claude Code skills.
+macOS setup: zsh (oh-my-zsh + starship), mise, zoxide, tmux, nvim, Ghostty, k9s, git and a few Claude Code skills.
 
 Each folder in `home/` is a [GNU Stow](https://www.gnu.org/software/stow/) package, symlinked into `~`. Editing `~/.zshrc` edits this repo.
 
@@ -14,6 +14,7 @@ Each folder in `home/` is a [GNU Stow](https://www.gnu.org/software/stow/) packa
 | `ghostty` | `.config/ghostty/` |
 | `starship` | `.config/starship.toml` |
 | `mise` | `.config/mise/` (global tool versions) |
+| `k9s` | `Library/Application Support/k9s/` (config, aliases, Catppuccin skin) |
 | `claude` | Claude Code skills and statusline |
 
 ## New machine
@@ -49,7 +50,7 @@ git restore .                  # then throws their contents away
 
 To unlink a package: `cd ~/dotfiles/home && stow --delete --target ~ foo`
 
-Always link through `bootstrap.sh`, not plain `stow`. Stow links a folder as a whole unless it already exists in `~`. `bootstrap.sh` creates `~/.config`, `~/.tmux/plugins` and `~/.claude/skills` first, because other tools write into them and those files must not end up here.
+Always link through `bootstrap.sh`, not plain `stow`. Stow links a folder as a whole unless it already exists in `~`. `bootstrap.sh` creates `~/.config`, `~/.tmux/plugins`, `~/.claude/skills` and `~/Library/Application Support/k9s` first, because other tools write into them and those files must not end up here.
 
 ## Updating the Brewfile
 
