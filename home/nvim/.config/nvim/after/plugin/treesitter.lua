@@ -1,24 +1,21 @@
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "php", "make" },
+local ts = require('nvim-treesitter')
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+-- Install the parser on first use of a filetype, then highlight with it.
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(ev)
+    local lang = vim.treesitter.language.get_lang(ev.match)
+    if not lang then return end
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  highlight = {
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+    local start = function() pcall(vim.treesitter.start, ev.buf, lang) end
+    if vim.list_contains(ts.get_installed(), lang) or not vim.list_contains(ts.get_available(), lang) then
+      -- Fails when no parser exists for the filetype; regex syntax stays on then.
+      return start()
+    end
+    ts.install(lang):await(vim.schedule_wrap(function()
+      if vim.api.nvim_buf_is_valid(ev.buf) then start() end
+    end))
+  end,
+})
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()

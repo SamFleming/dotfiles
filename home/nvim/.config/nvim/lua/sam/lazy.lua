@@ -20,8 +20,7 @@ require("lazy").setup({
 		}
 	},
 	'rose-pine/neovim',
-	{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-	{ 'nvim-treesitter/playground' },
+	{ 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
 	{ 'mbbill/undotree' },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
