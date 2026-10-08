@@ -28,3 +28,11 @@ vim.opt.colorcolumn = "0"
 vim.opt.indentexpr = "="
 vim.opt.smartindent = false
 vim.opt.autoindent = false
+
+-- Floats are transparent (see colors.lua), so they need a border to stand out from the buffer.
+vim.o.winborder = "rounded"
+
+vim.diagnostic.config({
+	severity_sort = true,
+	float = { header = "", source = "if_many" },
+})
