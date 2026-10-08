@@ -10,6 +10,16 @@ vim.lsp.config('yamlls', {
 	},
 })
 
+-- groovyls only bundles groovy core; Jenkinsfiles also use groovy-json (JsonSlurperClassic).
+-- The jars are downloaded by hand from Maven Central into this folder.
+vim.lsp.config('groovyls', {
+	settings = {
+		groovy = {
+			classpath = vim.fn.glob(vim.fn.stdpath('data') .. '/groovyls-classpath/*.jar', false, true),
+		},
+	},
+})
+
 local keymap = vim.keymap
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
