@@ -1,5 +1,5 @@
 typeset -U path  # drop duplicate PATH entries
-path=(/opt/homebrew/bin /opt/homebrew/sbin $HOME/go/bin $HOME/.composer/vendor/bin $path)
+path=($HOME/.local/bin /opt/homebrew/bin /opt/homebrew/sbin $HOME/go/bin $HOME/.composer/vendor/bin $path)
 export GOPATH=$HOME/go
 export EDITOR=nvim
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
