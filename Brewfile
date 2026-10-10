@@ -1,7 +1,6 @@
 tap "atlassian/acli"
-tap "derailed/k9s"
-tap "derailed/popeye"
-tap "nakabonne/ali"
+# Atlassian command-line interface for Jira and Confluence
+brew "atlassian/acli/acli"
 # CLI tool for working with Architecture Decision Records
 brew "adr-tools"
 # Asciicast to GIF converter
@@ -40,6 +39,8 @@ brew "highlight"
 brew "jq"
 # Fast, Dynamic Programming Language
 brew "julia"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
 # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubectx"
 # Template-free customization of Kubernetes YAML manifests

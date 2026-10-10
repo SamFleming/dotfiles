@@ -10,6 +10,8 @@ if [ $# -eq 0 ]; then
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		eval "$(/opt/homebrew/bin/brew shellenv)"
 	fi
+	# Homebrew ignores taps until they're trusted
+	grep -o '^tap "[^"]*"' Brewfile | cut -d'"' -f2 | xargs brew trust
 	# Install what's missing only. Upgrades stay a deliberate `brew upgrade`
 	brew bundle check --no-upgrade --file Brewfile >/dev/null || brew bundle install --no-upgrade --file Brewfile || echo "Some Brewfile entries failed, see above"
 fi
@@ -22,6 +24,15 @@ mkdir -p ~/.config ~/.tmux/plugins ~/.claude/skills ~/Library/Application\ Suppo
 # Every folder in home/ is a package
 cd home
 if [ $# -gt 0 ]; then packages=("$@"); else packages=(*/); packages=("${packages[@]%/}"); fi
+# Stow aborts on real files in the way, so move them aside first
+backup=~/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)
+for p in "${packages[@]}"; do
+	( cd "$p" && find . \( -type f -o -type l \) | sed 's|^\./||' ) | while read -r f; do
+		# -ef skips files already reached through a linked folder, which are the repo's own
+		[ -e ~/"$f" ] && [ ! -L ~/"$f" ] && [ ! ~/"$f" -ef "$p/$f" ] || continue
+		mkdir -p "$backup/$(dirname "$f")" && mv ~/"$f" "$backup/$f" && echo "backed up ~/$f to $backup"
+	done
+done
 # One at a time: stow 2.4.1 errors ("invalid target: .config") restowing several packages when only some are linked
 for p in "${packages[@]}"; do stow --restow --target ~ "$p"; done
 cd ..
@@ -30,7 +41,8 @@ cd ..
 
 # Cloned rather than installed: the oh-my-zsh installer overwrites ~/.zshrc
 [ -d ~/.oh-my-zsh ] || git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
-[ -d ~/.tmux/plugins/tpm ] || git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Check for the script, not the folder: an old setup can leave tpm empty
+[ -x ~/.tmux/plugins/tpm/bin/install_plugins ] || { rm -rf ~/.tmux/plugins/tpm && git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; }
 ~/.tmux/plugins/tpm/bin/install_plugins >/dev/null
 
 if [ ! -f ~/.gitconfig.local ]; then

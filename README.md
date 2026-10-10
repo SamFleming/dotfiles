@@ -26,8 +26,8 @@ git clone https://github.com/SamFleming/dotfiles.git ~/dotfiles   # macOS offers
 
 `bootstrap.sh` then:
 
-1. Installs Homebrew if it's missing, then everything in the `Brewfile` that isn't installed yet. It never upgrades; run `brew upgrade` for that.
-2. Links every package in `home/` into `~`.
+1. Installs Homebrew if it's missing, trusts the taps in the `Brewfile`, then everything in the `Brewfile` that isn't installed yet. It never upgrades; run `brew upgrade` for that.
+2. Links every package in `home/` into `~`. Any real file in the way is moved to `~/.dotfiles-backup/<timestamp>/` first.
 3. Clones oh-my-zsh and tpm, and installs the tmux plugins.
 4. Asks for your git name and email and writes `~/.gitconfig.local`. It signs commits with `~/.ssh/id_ed25519.pub` (or `id_rsa.pub`) if one exists.
 5. Runs `mise install` for the global tools (Node, Go and the Go tools).
@@ -35,13 +35,14 @@ git clone https://github.com/SamFleming/dotfiles.git ~/dotfiles   # macOS offers
 
 To link only some packages, and skip everything else: `~/dotfiles/bootstrap.sh zsh git nvim`
 
-`bootstrap.sh` is safe to re-run. If a real file is already in the way, Stow aborts without changing anything. To keep the repo's version:
+`bootstrap.sh` is safe to re-run.
 
-```bash
-cd ~/dotfiles/home
-stow --adopt --target ~ zsh    # moves the existing files into the package
-git restore .                  # then throws their contents away
-```
+Then:
+
+- Run `gh auth login`.
+- Add your SSH key on GitHub as a signing key as well as an authentication key, or signed commits show as Unverified.
+- Coming from `z`? Run `zoxide import z --merge` to bring over `~/.z`. Until then `zi` says "no match found".
+- If `font-hack-nerd-font` fails with "the existing Font is different", delete `~/Library/Fonts/HackNerdFont*` and re-run `bootstrap.sh`.
 
 ## Adding a file
 
