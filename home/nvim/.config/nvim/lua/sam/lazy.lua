@@ -142,7 +142,8 @@ require("lazy").setup({
 		"yetone/avante.nvim",
 		build = vim.fn.has("win32") ~= 0
 			and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-			or "make",
+			-- build.sh downloads prebuilt binaries; make builds from source and needs cargo
+			or "bash build.sh",
 		event = "VeryLazy",
 		version = false, -- Never set this value to "*"! Never!
 		---@module 'avante'

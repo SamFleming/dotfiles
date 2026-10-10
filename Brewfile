@@ -93,6 +93,8 @@ brew "tmux"
 brew "tmuxinator"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Find and verify credentials
 brew "trufflehog"
 # Executes a program periodically, showing output fullscreen
